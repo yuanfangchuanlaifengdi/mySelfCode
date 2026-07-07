@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  // Background palette
+  --cyber-bg: #05050a;
+  --cyber-bg-card: #0a0a16;
+  --cyber-bg-elevated: #0f0f25;
+  --cyber-bg-surface: #141430;
+
+  // Neon accents
+  --cyber-cyan: #00f0ff;
+  --cyber-magenta: #ff00aa;
+  --cyber-yellow: #ffe600;
+  --cyber-green: #00ff41;
+  --cyber-blue: #6200ff;
+  --cyber-red: #ff0044;
+  --cyber-orange: #ff6600;
+
+  // Text
+  --cyber-text: #d0d0e0;
+  --cyber-text-bright: #f0f0ff;
+  --cyber-text-dim: #606080;
+
+  // Borders & dividers
+  --cyber-border: #1a1a3e;
+  --cyber-border-glow: #2a2a5e;
+
+  // Glow presets
+  --glow-cyan: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 30px rgba(0, 240, 255, 0.2);
+  --glow-magenta: 0 0 8px rgba(255, 0, 170, 0.6), 0 0 30px rgba(255, 0, 170, 0.2);
+  --glow-yellow: 0 0 8px rgba(255, 230, 0, 0.5), 0 0 30px rgba(255, 230, 0, 0.15);
+  --glow-green: 0 0 8px rgba(0, 255, 65, 0.5), 0 0 30px rgba(0, 255, 65, 0.15);
+
+  // Typography
+  --font-display: 'Audiowide', cursive;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+
+  // Sizing
+  --scanline-size: 3px;
+}
+
+// ─── RESET ───────────────────────────────────────
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  background-color: var(--cyber-bg);
+  color: var(--cyber-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ─── GLOBAL SCANLINE OVERLAY ────────────────────
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 99999;
+}
+
+// ─── SCROLLBAR ──────────────────────────────────
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cyber-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-border-glow);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyber-cyan);
+}
+
+// ─── SELECTION ──────────────────────────────────
+::selection {
+  background: rgba(0, 240, 255, 0.3);
+  color: var(--cyber-text-bright);
+}
+
+// ─── ANCHORS ────────────────────────────────────
+a {
+  color: var(--cyber-cyan);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  &:hover {
+    text-shadow: var(--glow-cyan);
+  }
+}
+
+// ─── SHARED KEYFRAMES ───────────────────────────
+@keyframes glitch-1 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(-2px, 2px); }
+}
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px currentColor, 0 0 20px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 12px currentColor, 0 0 35px currentColor, 0 0 50px currentColor;
+  }
+}
+
+@keyframes scanline-move {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+@keyframes crt-flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.98; }
+  15% { opacity: 0.96; }
+  20% { opacity: 0.99; }
+  50% { opacity: 0.98; }
+  80% { opacity: 0.97; }
+  100% { opacity: 0.99; }
+}
